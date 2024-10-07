@@ -1,5 +1,16 @@
-/* @refresh reload */
 import { render } from "solid-js/web";
-import App from "./App";
+import { Router } from "@solidjs/router";
+import { lazy } from "solid-js";
 
-render(() => <App />, document.getElementById("root") as HTMLElement);
+const wrapper = document.getElementById("root");
+
+if (!wrapper) {
+  throw new Error("Wrapper div not found");
+}
+
+const routes = {
+  path: "/",
+  component: lazy(() => import("@/App")),
+}
+
+render(() => <Router>{routes}</Router>, wrapper)
